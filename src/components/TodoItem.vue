@@ -23,7 +23,6 @@ export default {
 .todo-item {
 	display: flex;
 	align-items: center;
-	font-size: 14px;
 	background-color: #fff;
 	padding: 10px;
 
