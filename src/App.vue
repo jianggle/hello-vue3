@@ -8,6 +8,14 @@
 </template>
 
 <style lang="scss">
+body {
+	/* iOS禁止调整字体大小 */
+	-ms-text-size-adjust: none!important;
+	-webkit-text-size-adjust: none!important;
+	-moz-text-size-adjust: none!important;
+	text-size-adjust: none!important;
+}
+
 * {
 	margin: 0;
 	padding: 0;
