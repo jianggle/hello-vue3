@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { ref, reactive, watch, getCurrentInstance, computed } from 'vue'
+import { ref, reactive, watch, computed } from 'vue'
 import TodoItem from '@/components/TodoItem'
 export default {
 	name: 'Todo',
@@ -42,8 +42,6 @@ export default {
 		TodoItem
 	},
 	setup() {
-		const { ctx } = getCurrentInstance()
-
 		let localTodo = window.localStorage.getItem('todo')
 		localTodo = localTodo && JSON.parse(localTodo)
 		let list = reactive(localTodo || { todo: [], over: [] })
@@ -60,30 +58,9 @@ export default {
 			return list.over.length
 		})
 
-		function handleAdd() {
-			let val = todoContent.value
-			if (!val) return;
-			if (list.todo.includes(val)) {
-				return ctx.$toast('已有相同内容')
-			}
-			list.todo.unshift(val)
-			todoContent.value = ''
-		}
-
 		function handleOver(index) {
 			let val = list.todo.splice(index, 1)[0]
 			list.over.unshift(val)
-		}
-
-		async function handleRemove(type, index) {
-			try {
-				await ctx.$dialog.confirm({
-					message: '确定移除吗？'
-				})
-				list[type].splice(index, 1)
-			} catch (error) {
-				console.log(error)
-			}
 		}
 
 		return {
@@ -91,9 +68,28 @@ export default {
 			list,
 			todoNum,
 			closedNum,
-			handleAdd,
 			handleOver,
-			handleRemove,
+		}
+	},
+	methods: {
+		handleAdd() {
+			let val = this.todoContent
+			if (!val) return;
+			if (this.list.todo.includes(val)) {
+				return this.$toast('已有相同内容')
+			}
+			this.list.todo.unshift(val)
+			this.todoContent = ''
+		},
+		async handleRemove(type, index) {
+			try {
+				await this.$dialog.confirm({
+					message: '确定移除吗？'
+				})
+				this.list[type].splice(index, 1)
+			} catch (error) {
+				console.log(error)
+			}
 		}
 	}
 }
