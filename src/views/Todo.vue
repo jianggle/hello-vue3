@@ -35,7 +35,7 @@
 
 <script>
 import { ref, reactive, watch, computed } from 'vue'
-import TodoItem from '@/components/TodoItem'
+import TodoItem from '../components/TodoItem.vue'
 export default {
 	name: 'Todo',
 	components: {

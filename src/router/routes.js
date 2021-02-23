@@ -1,14 +1,14 @@
 export default [
 	{
 		path: '/',
-		component: () => import('../views/Home')
+		component: () => import('../views/Home.vue')
 	},
 	{
 		path: '/todo',
-		component: () => import('../views/Todo')
+		component: () => import('../views/Todo.vue')
 	},
 	{
 		path: '/about',
-		component: () => import('../views/About')
+		component: () => import('../views/About.vue')
 	}
 ]
